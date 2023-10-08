@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [Дмитрий Шульга](https://up.htmlacademy.ru/univer-js3/2/user/2430569).
-* Наставник: [Глеб Грецков](https://htmlacademy.ru/profile/id1487865).
+* Наставник: [Глеб Клецков](https://htmlacademy.ru/profile/id1487865).
 
 ---
 
