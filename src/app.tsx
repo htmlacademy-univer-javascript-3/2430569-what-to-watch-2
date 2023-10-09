@@ -1,5 +1,5 @@
-import {Main} from './pages/main.tsx';
+import {AppRouter} from './routes/appRouter.tsx';
 
 export const App = () => (
-  <Main/>
+  <AppRouter/>
 );
