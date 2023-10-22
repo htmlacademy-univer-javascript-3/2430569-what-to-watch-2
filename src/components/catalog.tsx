@@ -1,6 +1,6 @@
-import {CatalogGenreList} from './catalogGenreList.tsx';
-import {CatalogFilmList} from './catalogFilmList.tsx';
-import {genres} from '../data/genresData.ts';
+import {CatalogGenreList} from './catalog-genre-list.tsx';
+import {CatalogFilmList} from './catalog-film-list.tsx';
+import {genres} from '../data/genres-data.ts';
 import {films} from '../data/data.ts';
 
 export const Catalog = () => (

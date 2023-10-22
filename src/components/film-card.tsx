@@ -1,6 +1,6 @@
 import {Logo} from './logo.tsx';
-import {FilmCardData} from '../data/filmCardData.ts';
-import {HeaderUserBlock} from './headerUserBlock.tsx';
+import {FilmCardData} from '../data/film-card-data.ts';
+import {HeaderUserBlock} from './header-user-block.tsx';
 
 export const FilmCard = ({filmCard}: {filmCard: FilmCardData}) => (
   <section className="film-card">
