@@ -1,4 +1,4 @@
-import {Genre} from '../data/genres-data.ts';
+import {Genre} from '../mocks/genres-data.ts';
 
 export const CatalogGenreListElement = ({ genre }: { genre: Genre }) => (
   <li className={`catalog__genres-item ${genre.isActive ? 'catalog__genres-item--active' : ''}`}>

@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {routes} from './routes-data.ts';
+import {ROUTES} from './routes-data.ts';
 import {Main} from '../pages/main.tsx';
 import {SignIn} from '../pages/signIn.tsx';
 import {MyList} from '../pages/my-list.tsx';
@@ -8,19 +8,20 @@ import {AddReview} from '../pages/add-review.tsx';
 import {Player} from '../pages/player.tsx';
 import {NotFoundPage} from '../pages/not-found-page.tsx';
 import {PrivateRoute} from './private-route.tsx';
+import {Film} from '../mocks/films.ts';
 
-export const AppRouter = () => (
+export const AppRouter = ({films}: {films: Film[]}) => (
   <BrowserRouter>
     <Routes>
-      <Route path={routes.MAIN} element={<Main/>}/>
-      <Route path={routes.SING_IN} element={<SignIn/>}/>
-      <Route path={routes.MY_LIST} element={<PrivateRoute><MyList/></PrivateRoute>}/>
-      <Route path={routes.FILMS}>
-        <Route path={routes.FILM} element={<MoviePage currentState={MoviePageState.OVERVIEW}/>}/>
-        <Route path={routes.REVIEW} element={<PrivateRoute><AddReview/></PrivateRoute>}/>
+      <Route path={ROUTES.MAIN} element={<Main films={films}/>}/>
+      <Route path={ROUTES.SING_IN} element={<SignIn/>}/>
+      <Route path={ROUTES.MY_LIST} element={<PrivateRoute><MyList films={films}/></PrivateRoute>}/>
+      <Route path={ROUTES.FILMS}>
+        <Route path={ROUTES.FILM} element={<MoviePage films={films} currentState={MoviePageState.OVERVIEW}/>}/>
+        <Route path={ROUTES.REVIEW} element={<PrivateRoute><AddReview films={films}/></PrivateRoute>}/>
       </Route>
-      <Route path={routes.PLAYER} element={<Player/>}/>
-      <Route path={routes.NOT_FOUND} element={<NotFoundPage/>}/>
+      <Route path={ROUTES.PLAYER} element={<Player/>}/>
+      <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage/>}/>
     </Routes>
   </BrowserRouter>
 );

@@ -1,15 +1,25 @@
 import {CatalogGenreList} from './catalog-genre-list.tsx';
 import {CatalogFilmList} from './catalog-film-list.tsx';
-import {genres} from '../data/genres-data.ts';
-import {films} from '../data/data.ts';
+import {genres} from '../mocks/genres-data.ts';
+import {Film} from '../mocks/films.ts';
 
-export const Catalog = () => (
+interface Props {
+  films: Film[];
+  withoutGenres?: boolean;
+  withoutShowMoreButton?: boolean;
+}
+
+const CatalogShowMoreButton = () => (
+  <div className="catalog__more">
+    <button className="catalog__button" type="button">Show more</button>
+  </div>
+);
+
+export const Catalog = ({films, withoutGenres = false, withoutShowMoreButton = false}: Props) => (
   <section className="catalog">
     <h2 className="catalog__title visually-hidden">Catalog</h2>
-    <CatalogGenreList genres={genres}/>
+    {!withoutGenres ? <CatalogGenreList genres={genres}/> : null}
     <CatalogFilmList films={films}/>
-    <div className="catalog__more">
-      <button className="catalog__button" type="button">Show more</button>
-    </div>
+    {!withoutShowMoreButton ? <CatalogShowMoreButton/> : null}
   </section>
 );

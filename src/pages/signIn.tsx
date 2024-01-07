@@ -1,4 +1,5 @@
 import {Logo} from '../components/logo.tsx';
+import {Footer} from '../components/footer.tsx';
 
 export const SignIn = ({isError = false, isMessage = false}: {isError?: boolean; isMessage?: boolean}) => {
   const SignInMessage = ({text}: {text: string}) => (
@@ -37,13 +38,7 @@ export const SignIn = ({isError = false, isMessage = false}: {isError?: boolean;
         </form>
       </div>
 
-      <footer className="page-footer">
-        <Logo light/>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 };
