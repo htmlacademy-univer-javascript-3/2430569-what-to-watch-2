@@ -1,5 +1,5 @@
-import {CatalogGenreListElement} from './catalogGenreListElement.tsx';
-import {Genre} from '../data/genresData.ts';
+import {CatalogGenreListElement} from './catalog-genre-list-element.tsx';
+import {Genre} from '../mocks/genres-data.ts';
 
 export const CatalogGenreList = ({ genres }: { genres: Genre[] }) => (
   <ul className="catalog__genres-list">

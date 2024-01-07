@@ -1,5 +1,6 @@
-import {AppRouter} from './routes/appRouter.tsx';
+import {AppRouter} from './routes/app-router.tsx';
+import {Film} from './mocks/films.ts';
 
-export const App = () => (
-  <AppRouter/>
+export const App = ({films}: {films: Film[]}) => (
+  <AppRouter films={films}/>
 );

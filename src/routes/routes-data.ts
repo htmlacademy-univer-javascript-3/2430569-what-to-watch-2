@@ -1,4 +1,4 @@
-export const enum routes {
+export const enum ROUTES {
   MAIN = '/',
   SING_IN = '/login',
   MY_LIST = '/mylist',
