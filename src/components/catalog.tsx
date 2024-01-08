@@ -19,7 +19,7 @@ export const Catalog = ({films, withoutGenres = false, withoutShowMoreButton = f
   <section className="catalog">
     <h2 className="catalog__title visually-hidden">Catalog</h2>
     {!withoutGenres ? <CatalogGenreList genres={genres}/> : null}
-    <CatalogFilmList films={films}/>
+    <CatalogFilmList films={films} maxCountFilter={8}/>
     {!withoutShowMoreButton ? <CatalogShowMoreButton/> : null}
   </section>
 );
