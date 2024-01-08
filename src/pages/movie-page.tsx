@@ -5,14 +5,25 @@ import {Link, Navigate, useParams} from 'react-router-dom';
 import {ROUTES} from '../routes/routes-data.ts';
 import {MoviePageTabs} from '../components/movie-page-tabs.tsx';
 import {CatalogFilmList} from '../components/catalog-film-list.tsx';
-import {useAppSelector} from '../store/hooks.ts';
+import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
+import {fetchCurrentFilm} from '../store/action.ts';
+import {Spinner} from '../components/spinner.tsx';
 
 export const MoviePage = ({inList = false}: {inList?: boolean}) => {
   const {id} = useParams();
-  const stateAllFilms = useAppSelector((state) => state.allFilms);
-  const film = stateAllFilms.find((item) => item.id === id);
+  const dispatch = useAppDispatch();
+  const stateCurrentFilm = useAppSelector((state) => state.currentFilm);
+  const stateIsCurrentFilmLoading = useAppSelector((state) => state.isCurrentFilmLoading);
 
-  if (!film) {
+  if (id && id !== stateCurrentFilm?.id) {
+    dispatch(fetchCurrentFilm(id));
+  }
+
+  if (stateIsCurrentFilmLoading) {
+    return (<Spinner/>);
+  }
+
+  if (!stateCurrentFilm) {
     return (<Navigate to={ROUTES.NOT_FOUND}/>);
   }
 
@@ -21,7 +32,7 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.backgroundImage} alt={film.name}/>
+            <img src={stateCurrentFilm.backgroundImage} alt={stateCurrentFilm.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -33,10 +44,10 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}</h2>
+              <h2 className="film-card__title">{stateCurrentFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.released}</span>
+                <span className="film-card__genre">{stateCurrentFilm.genre}</span>
+                <span className="film-card__year">{stateCurrentFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -53,7 +64,7 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={ROUTES.REVIEW.replace(':id', film.id)} className="btn film-card__button">Add review</Link>
+                <Link to={ROUTES.REVIEW.replace(':id', stateCurrentFilm.id)} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -62,10 +73,10 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.posterImage} alt={film.name} width="218" height="327"/>
+              <img src={stateCurrentFilm.posterImage} alt={stateCurrentFilm.name} width="218" height="327"/>
             </div>
 
-            <MoviePageTabs film={film}/>
+            <MoviePageTabs film={stateCurrentFilm}/>
           </div>
         </div>
       </section>
@@ -75,9 +86,9 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
           <h2 className="catalog__title">More like this</h2>
 
           <CatalogFilmList
-            genreFilter={film.genre}
+            genreFilter={stateCurrentFilm.genre}
             maxCountFilter={4}
-            excludeFilmByIdFilter={film.id}
+            excludeFilmByIdFilter={stateCurrentFilm.id}
           />
         </section>
 

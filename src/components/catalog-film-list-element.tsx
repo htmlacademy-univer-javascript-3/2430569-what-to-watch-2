@@ -1,11 +1,11 @@
-import {Film} from '../mocks/films.ts';
 import {useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import {ROUTES} from '../routes/routes-data.ts';
 import {VideoPlayer} from './video-player.tsx';
+import {FilmListElement} from '../types/film.ts';
 
 interface Props {
-  film: Film;
+  film: FilmListElement;
   isActive?: boolean;
   onMouseEnter: (id: string) => void;
   onMouseLeave: () => void;
@@ -24,9 +24,9 @@ export const CatalogFilmListElement = (props: Props) => {
     >
       <div className="small-film-card__image">
         {props.isActive ? (
-          <VideoPlayer src={props.film.videoLink} poster={props.film.posterImage} />
+          <VideoPlayer src={props.film.previewVideoLink} poster={props.film.previewImage} />
         ) : (
-          <img src={props.film.backgroundImage} alt={props.film.name} width="280" height="175"/>
+          <img src={props.film.previewImage} alt={props.film.name} width="280" height="175"/>
         )}
       </div>
       <h3 className="small-film-card__title">

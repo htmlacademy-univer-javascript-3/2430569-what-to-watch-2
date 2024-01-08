@@ -1,5 +1,5 @@
-import {Film} from '../mocks/films.ts';
 import {convertFilmRating} from '../utils/rating.ts';
+import {Film} from '../types/film.ts';
 
 export const MoviePageTabOverview = ({film}: {film: Film}) => (
   <>
@@ -18,8 +18,7 @@ export const MoviePageTabOverview = ({film}: {film: Film}) => (
 
       <p className="film-card__starring">
         <strong>
-          Starring: {`${film.starring.join(', ') } `}
-          and other
+          Starring: {`${film.starring.join(', ')}`} and other
         </strong>
       </p>
     </div>

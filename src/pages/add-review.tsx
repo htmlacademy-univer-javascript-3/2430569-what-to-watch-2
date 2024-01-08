@@ -3,14 +3,25 @@ import {HeaderUserBlock} from '../components/header-user-block.tsx';
 import {ROUTES} from '../routes/routes-data.ts';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {AddReviewForm} from '../components/add-review-form.tsx';
-import {useAppSelector} from '../store/hooks.ts';
+import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
+import {fetchCurrentFilm} from '../store/action.ts';
+import {Spinner} from '../components/spinner.tsx';
 
 export const AddReview = () => {
   const {id} = useParams();
-  const stateAllFilms = useAppSelector((state) => state.allFilms);
-  const film = stateAllFilms.find((item) => item.id === id);
+  const dispatch = useAppDispatch();
+  const stateCurrentFilm = useAppSelector((state) => state.currentFilm);
+  const stateIsCurrentFilmLoading = useAppSelector((state) => state.isCurrentFilmLoading);
 
-  if (!film) {
+  if (id && id !== stateCurrentFilm?.id) {
+    dispatch(fetchCurrentFilm(id));
+  }
+
+  if (stateIsCurrentFilmLoading) {
+    return (<Spinner/>);
+  }
+
+  if (!stateCurrentFilm) {
     return (<Navigate to={ROUTES.NOT_FOUND}/>);
   }
 
@@ -18,7 +29,7 @@ export const AddReview = () => {
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film.backgroundImage} alt={film.name}/>
+          <img src={stateCurrentFilm.backgroundImage} alt={stateCurrentFilm.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -28,10 +39,10 @@ export const AddReview = () => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={ROUTES.FILM.replace(':id', film.id)} className="breadcrumbs__link">{film.name}</Link>
+                <Link to={ROUTES.FILM.replace(':id', stateCurrentFilm.id)} className="breadcrumbs__link">{stateCurrentFilm.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to={ROUTES.REVIEW.replace(':id', film.id)} className="breadcrumbs__link">Add review</Link>
+                <Link to={ROUTES.REVIEW.replace(':id', stateCurrentFilm.id)} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
@@ -39,7 +50,7 @@ export const AddReview = () => {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={film.posterImage} alt={film.name} width="218" height="327"/>
+          <img src={stateCurrentFilm.posterImage} alt={stateCurrentFilm.name} width="218" height="327"/>
         </div>
       </div>
 
