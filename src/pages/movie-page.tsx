@@ -2,14 +2,15 @@ import {Logo} from '../components/logo.tsx';
 import {Footer} from '../components/footer.tsx';
 import {HeaderUserBlock} from '../components/header-user-block.tsx';
 import {Link, Navigate, useParams} from 'react-router-dom';
-import {Film} from '../mocks/films.ts';
 import {ROUTES} from '../routes/routes-data.ts';
 import {MoviePageTabs} from '../components/movie-page-tabs.tsx';
 import {CatalogFilmList} from '../components/catalog-film-list.tsx';
+import {useAppSelector} from '../store/hooks.ts';
 
-export const MoviePage = ({inList = false, films}: {inList?: boolean; films: Film[]}) => {
+export const MoviePage = ({inList = false}: {inList?: boolean}) => {
   const {id} = useParams();
-  const film = films.find((item) => item.id === id);
+  const stateAllFilms = useAppSelector((state) => state.allFilms);
+  const film = stateAllFilms.find((item) => item.id === id);
 
   if (!film) {
     return (<Navigate to={ROUTES.NOT_FOUND}/>);
@@ -74,7 +75,6 @@ export const MoviePage = ({inList = false, films}: {inList?: boolean; films: Fil
           <h2 className="catalog__title">More like this</h2>
 
           <CatalogFilmList
-            films={films}
             genreFilter={film.genre}
             maxCountFilter={4}
             excludeFilmByIdFilter={film.id}

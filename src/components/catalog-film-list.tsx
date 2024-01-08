@@ -1,10 +1,9 @@
 
 import {CatalogFilmListElement} from './catalog-film-list-element.tsx';
-import {Film} from '../mocks/films.ts';
 import {useState} from 'react';
+import {useAppSelector} from '../store/hooks.ts';
 
 interface Props {
-  films: Film[];
   genreFilter?: string;
   maxCountFilter: number;
   excludeFilmByIdFilter?: string;
@@ -12,6 +11,8 @@ interface Props {
 
 export const CatalogFilmList = (props: Props) => {
   const [activeFilm, setActiveFilm] = useState<string | null>(null);
+  const stateFilms = useAppSelector((state) => state.films);
+  const stateAllFilms = useAppSelector((state) => state.allFilms);
 
   const handleCardHover = (filmId: string) => {
     setActiveFilm(filmId);
@@ -20,10 +21,13 @@ export const CatalogFilmList = (props: Props) => {
     setActiveFilm(null);
   };
 
+  const filmList = props.genreFilter ?
+    stateAllFilms.filter((item) => props.genreFilter === item.genre) :
+    stateFilms;
+
   return (
     <div className="catalog__films-list">
-      {props.films
-        .filter((item) => !props.genreFilter || props.genreFilter === item.genre)
+      {filmList
         .filter((item) => !props.excludeFilmByIdFilter || props.excludeFilmByIdFilter !== item.id)
         .map((item) => (
           <CatalogFilmListElement
