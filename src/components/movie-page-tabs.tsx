@@ -1,9 +1,9 @@
-import {Film} from '../mocks/films.ts';
 import {useCallback, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {MoviePageTabDetails} from './movie-page-tab-details.tsx';
 import {MoviePageTabOverview} from './movie-page-tab-overview.tsx';
 import {MoviePageTabReviews} from './movie-page-tab-reviews.tsx';
+import {Film} from '../types/film.ts';
 
 const enum MoviePageTabsState {
   OVERVIEW,

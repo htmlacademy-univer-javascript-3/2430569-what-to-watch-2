@@ -21,6 +21,7 @@ export const Catalog = ({withoutGenres = false, withoutShowMoreButton = false}: 
   const handleClick = useCallback(()=>{
     setLength((prev) => prev + LIST_LENGTH_STEP);
   },[]);
+
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>

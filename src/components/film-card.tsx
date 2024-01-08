@@ -1,8 +1,8 @@
 import {Logo} from './logo.tsx';
 import {HeaderUserBlock} from './header-user-block.tsx';
-import {Film} from '../mocks/films.ts';
 import {ROUTES} from '../routes/routes-data.ts';
 import {Navigate} from 'react-router-dom';
+import {Film} from '../types/film.ts';
 
 export const FilmCard = ({film}: {film: Film | undefined}) => {
   if (!film) {
