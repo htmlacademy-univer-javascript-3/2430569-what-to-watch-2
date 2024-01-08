@@ -1,11 +1,12 @@
 import {Film} from '../mocks/films.ts';
+import {convertFilmRating} from '../utils/rating.ts';
 
 export const MoviePageTabOverview = ({film}: {film: Film}) => (
   <>
     <div className="film-rating">
       <div className="film-rating__score">{film.rating}</div>
       <p className="film-rating__meta">
-        <span className="film-rating__level">Very good</span>
+        <span className="film-rating__level">{convertFilmRating(film.rating)}</span>
         <span className="film-rating__count">240 ratings</span>
       </p>
     </div>

@@ -1,13 +1,14 @@
 import {Logo} from '../components/logo.tsx';
 import {HeaderUserBlock} from '../components/header-user-block.tsx';
-import {Film} from '../mocks/films.ts';
 import {ROUTES} from '../routes/routes-data.ts';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {AddReviewForm} from '../components/add-review-form.tsx';
+import {useAppSelector} from '../store/hooks.ts';
 
-export const AddReview = ({films}: {films: Film[]}) => {
+export const AddReview = () => {
   const {id} = useParams();
-  const film = films.find((item) => item.id === id);
+  const stateAllFilms = useAppSelector((state) => state.allFilms);
+  const film = stateAllFilms.find((item) => item.id === id);
 
   if (!film) {
     return (<Navigate to={ROUTES.NOT_FOUND}/>);
