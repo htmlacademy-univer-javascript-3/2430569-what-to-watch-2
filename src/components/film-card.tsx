@@ -1,12 +1,13 @@
 import {Logo} from './logo.tsx';
 import {HeaderUserBlock} from './header-user-block.tsx';
-import {ROUTES} from '../routes/routes-data.ts';
+import {RoutesData} from '../routes/routes-data.ts';
 import {Navigate} from 'react-router-dom';
 import {Film} from '../types/film.ts';
+import {memo} from 'react';
 
-export const FilmCard = ({film}: {film: Film | undefined}) => {
+const FilmCardComponent = ({film}: {film: Film | undefined}) => {
   if (!film) {
-    return (<Navigate to={ROUTES.NOT_FOUND}/>);
+    return (<Navigate to={RoutesData.NotFound}/>);
   }
 
   return (
@@ -56,3 +57,5 @@ export const FilmCard = ({film}: {film: Film | undefined}) => {
     </section>
   );
 };
+
+export const FilmCard = memo(FilmCardComponent);

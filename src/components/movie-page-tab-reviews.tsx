@@ -1,12 +1,13 @@
 import {ReducerName} from '../types/reducer-name.ts';
 import {useAppSelector} from '../store/hooks.ts';
+import {memo} from 'react';
 
 const getDateString = (postDate: Date) =>
   `${postDate.toLocaleString('eng', {
     month: 'long',
   })} ${postDate.getDate()}, ${postDate.getFullYear()}`;
 
-const MoviePageTabReviewsElem = ({text, author, date, rating}: {text: string; author: string; date: string; rating: number}) => (
+const MoviePageTabReviewsElemComponent = ({text, author, date, rating}: {text: string; author: string; date: string; rating: number}) => (
   <div className="review">
     <blockquote className="review__quote">
       <p className="review__text">{text}</p>
@@ -20,7 +21,9 @@ const MoviePageTabReviewsElem = ({text, author, date, rating}: {text: string; au
   </div>
 );
 
-export const MoviePageTabReviews = () => {
+const MoviePageTabReviewsElem = memo(MoviePageTabReviewsElemComponent);
+
+const MoviePageTabReviewsComponent = () => {
   const stateReviews = useAppSelector((state) => state[ReducerName.Film].reviews);
   return (
     <div className="film-card__reviews film-card__row">
@@ -49,3 +52,5 @@ export const MoviePageTabReviews = () => {
     </div>
   );
 };
+
+export const MoviePageTabReviews = memo(MoviePageTabReviewsComponent);

@@ -1,4 +1,5 @@
 import {Film} from '../types/film.ts';
+import {memo} from 'react';
 
 const DetailsItem = ({header, description}: {header: string; description: string}) => (
   <p className="film-card__details-item">
@@ -7,7 +8,7 @@ const DetailsItem = ({header, description}: {header: string; description: string
   </p>
 );
 
-export const MoviePageTabDetails = ({film}: {film: Film}) => (
+const MoviePageTabDetailsComponent = ({film}: {film: Film}) => (
   <div className="film-card__text film-card__row">
     <div className="film-card__text-col">
       <DetailsItem header="Director" description={film.director}/>
@@ -21,3 +22,5 @@ export const MoviePageTabDetails = ({film}: {film: Film}) => (
     </div>
   </div>
 );
+
+export const MoviePageTabDetails = memo(MoviePageTabDetailsComponent);

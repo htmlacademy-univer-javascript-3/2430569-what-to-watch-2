@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react';
+import {memo, useCallback, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {MoviePageTabDetails} from './movie-page-tab-details.tsx';
 import {MoviePageTabOverview} from './movie-page-tab-overview.tsx';
@@ -17,7 +17,7 @@ const MOVIE_PAGE_TABS = [
   {state: MoviePageTabsState.REVIEWS, title: 'Reviews'},
 ];
 
-export const MoviePageTabs = ({film}: {film: Film}) => {
+const MoviePageTabsComponent = ({film}: {film: Film}) => {
   const [activeTab, setActiveTab] = useState(MoviePageTabsState.OVERVIEW);
   const handleTabClick = useCallback((event: React.MouseEvent<HTMLLIElement>) => {
     const { innerText } = event.currentTarget;
@@ -56,3 +56,5 @@ export const MoviePageTabs = ({film}: {film: Film}) => {
     </div>
   );
 };
+
+export const MoviePageTabs = memo(MoviePageTabsComponent);

@@ -2,8 +2,9 @@ import {Footer} from '../components/footer.tsx';
 import {Logo} from '../components/logo.tsx';
 import {HeaderUserBlock} from '../components/header-user-block.tsx';
 import {Catalog} from '../components/catalog.tsx';
+import {memo} from 'react';
 
-export const MyList = () => (
+const MyListComponent = () => (
   <div className="user-page">
     <header className="page-header user-page__head">
       <Logo/>
@@ -14,3 +15,5 @@ export const MyList = () => (
     <Footer/>
   </div>
 );
+
+export const MyList = memo(MyListComponent);

@@ -10,7 +10,7 @@ interface AuthState {
 }
 
 const initialAuthState: AuthState = {
-  authStatus: AuthStatus.NO_AUTH,
+  authStatus: AuthStatus.NoAuth,
   user: null,
 };
 
@@ -23,19 +23,19 @@ export const authReducer = createSlice({
       .addCase(logout.fulfilled, (state) => {
         dropToken();
         state.user = null;
-        state.authStatus = AuthStatus.NO_AUTH;
+        state.authStatus = AuthStatus.NoAuth;
       })
       .addCase(login.fulfilled, (state, action) => {
         saveToken(action.payload.token);
         state.user = action.payload;
-        state.authStatus = AuthStatus.AUTH;
+        state.authStatus = AuthStatus.Auth;
       })
       .addCase(checkAuth.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.authStatus = AuthStatus.AUTH;
+        state.authStatus = AuthStatus.Auth;
       })
       .addCase(checkAuth.rejected, (state) => {
-        state.authStatus = AuthStatus.NO_AUTH;
+        state.authStatus = AuthStatus.NoAuth;
       });
   },
 }).reducer;

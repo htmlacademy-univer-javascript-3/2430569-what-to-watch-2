@@ -4,37 +4,37 @@ import {User} from '../types/user.ts';
 import {Review} from '../types/review.ts';
 
 const Action = {
-  SET_GENRE: 'SET_GENRE',
-  SET_FILMS_LOAD_STATUS: 'SET_FILMS_LOAD_STATUS',
-  SET_FILMS: 'SET_FILMS',
-  SET_USER: 'SET_USER',
-  SET_AUTHORIZATION_STATUS: 'SET_AUTHORIZATION_STATUS',
-  SET_ERROR: 'SET_ERROR',
-  SET_REVIEWS: 'SET_REVIEWS',
+  SetGenre: 'main/setGenre',
+  SetFilmsLoadStatus: 'main/setFilmsLoadStatus',
+  SetFilms: 'main/setFilms',
+  SetUser: 'main/setUser',
+  SetAuthStatus: 'main/setAuthStatus',
+  SetError: 'main/setError',
+  SetReviews: 'main/setReviews',
 };
 
-export const setGenre = createAction(Action.SET_GENRE, (genre: string) => ({
+export const setGenre = createAction(Action.SetGenre, (genre: string) => ({
   payload: genre,
 }));
 export const setFilmsLoadStatus = createAction(
-  Action.SET_FILMS_LOAD_STATUS,
+  Action.SetFilmsLoadStatus,
   (status: boolean) => ({ payload: status })
 );
-export const setFilms = createAction(Action.SET_FILMS, (films: Film[]) => ({
+export const setFilms = createAction(Action.SetFilms, (films: Film[]) => ({
   payload: films,
 }));
-export const setUser = createAction(Action.SET_USER, (user: User | null) => ({
+export const setUser = createAction(Action.SetUser, (user: User | null) => ({
   payload: user,
 }));
 export const setAuthorizationStatus = createAction(
-  Action.SET_AUTHORIZATION_STATUS,
+  Action.SetAuthStatus,
   (status: string) => ({ payload: status })
 );
 export const setError = createAction(
-  Action.SET_ERROR,
+  Action.SetError,
   (error: string | null) => ({ payload: error })
 );
 export const setReviews = createAction(
-  Action.SET_REVIEWS,
+  Action.SetReviews,
   (review: Review[]) => ({ payload: review })
 );

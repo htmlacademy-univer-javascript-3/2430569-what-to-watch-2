@@ -1,14 +1,15 @@
 import {Logo} from '../components/logo.tsx';
 import {HeaderUserBlock} from '../components/header-user-block.tsx';
-import {ROUTES} from '../routes/routes-data.ts';
+import {RoutesData} from '../routes/routes-data.ts';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {AddReviewForm} from '../components/add-review-form.tsx';
 import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
 import {Spinner} from '../components/spinner.tsx';
 import {ReducerName} from '../types/reducer-name.ts';
 import {fetchFilm} from '../store/api-actions.ts';
+import {memo} from 'react';
 
-export const AddReview = () => {
+const AddReviewComponent = () => {
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const stateFilm = useAppSelector((state) => state[ReducerName.Film].film);
@@ -23,7 +24,7 @@ export const AddReview = () => {
   }
 
   if (!stateFilm) {
-    return (<Navigate to={ROUTES.NOT_FOUND}/>);
+    return (<Navigate to={RoutesData.NotFound}/>);
   }
 
   return (
@@ -40,10 +41,10 @@ export const AddReview = () => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={ROUTES.FILM.replace(':id', stateFilm.id)} className="breadcrumbs__link">{stateFilm.name}</Link>
+                <Link to={RoutesData.Film.replace(':id', stateFilm.id)} className="breadcrumbs__link">{stateFilm.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to={ROUTES.REVIEW.replace(':id', stateFilm.id)} className="breadcrumbs__link">Add review</Link>
+                <Link to={RoutesData.Review.replace(':id', stateFilm.id)} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
@@ -62,3 +63,5 @@ export const AddReview = () => {
     </section>
   );
 };
+
+export const AddReview = memo(AddReviewComponent);

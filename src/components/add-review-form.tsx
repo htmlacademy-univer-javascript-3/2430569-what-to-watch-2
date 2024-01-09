@@ -1,9 +1,9 @@
-import {ChangeEvent, Fragment, useCallback, useState} from 'react';
+import {ChangeEvent, Fragment, memo, useCallback, useState} from 'react';
 import {addReview, fetchReviews} from '../store/api-actions.ts';
 import {useAppDispatch} from '../store/hooks.ts';
 import {useNavigate} from 'react-router-dom';
 
-export const AddReviewForm = ({filmId}: {filmId: string}) => {
+const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
   const [formData, setFormData] = useState({
     rating: 0,
     comment: '',
@@ -62,6 +62,7 @@ export const AddReviewForm = ({filmId}: {filmId: string}) => {
           <button className="add-review__btn" type="submit">Post</button>
         </div>
       </div>
-    </form>
-  );
+    </form>);
 };
+
+export const AddReviewForm = memo(AddReviewFormComponent);

@@ -1,9 +1,9 @@
 import {useAppDispatch} from '../store/hooks.ts';
 import {setGenre} from '../store/actions.ts';
-import {FormEvent, useCallback} from 'react';
+import {FormEvent, memo, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 
-export const CatalogGenreListElement = ({genre, isActive = false}: {genre: string; isActive: boolean}) => {
+const CatalogGenreListElementComponent = ({genre, isActive = false}: {genre: string; isActive: boolean}) => {
   const appDispatch = useAppDispatch();
   const handleClick = useCallback(
     (event: FormEvent<HTMLAnchorElement>) => {
@@ -18,3 +18,6 @@ export const CatalogGenreListElement = ({genre, isActive = false}: {genre: strin
     </li>
   );
 };
+
+export const CatalogGenreListElement = memo(CatalogGenreListElementComponent);
+
