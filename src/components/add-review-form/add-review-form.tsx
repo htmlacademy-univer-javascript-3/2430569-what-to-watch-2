@@ -1,4 +1,4 @@
-import {ChangeEvent, Fragment, memo, useCallback, useState} from 'react';
+import React, {ChangeEvent, Fragment, memo, useCallback, useState} from 'react';
 import {addReview, fetchReviews} from '../../store/api-actions.ts';
 import {useAppDispatch} from '../../store/hooks.ts';
 import {useNavigate} from 'react-router-dom';
