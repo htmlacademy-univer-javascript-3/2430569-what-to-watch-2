@@ -7,18 +7,27 @@ import {MoviePageTabs} from '../components/movie-page-tabs.tsx';
 import {CatalogFilmList} from '../components/catalog-film-list.tsx';
 import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
 import {Spinner} from '../components/spinner.tsx';
-import {fetchFilm} from '../store/api-actions.ts';
+import {fetchFilm, fetchReviews, fetchSimilar} from '../store/api-actions.ts';
 import {ReducerName} from '../types/reducer-name.ts';
+import {AuthStatus} from '../types/auth-status.ts';
+import {useLayoutEffect} from 'react';
 
 export const MoviePage = ({inList = false}: {inList?: boolean}) => {
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const stateCurrentFilm = useAppSelector((state) => state[ReducerName.Film].film);
   const stateIsCurrentFilmLoading = useAppSelector((state) => state[ReducerName.Film].isLoading);
+  const similar = useAppSelector((state) => state[ReducerName.Film].similar);
+  const stateAuthStatus = useAppSelector((state) => state[ReducerName.Auth].authStatus);
 
-  if (id && id !== stateCurrentFilm?.id) {
-    dispatch(fetchFilm(id));
-  }
+
+  useLayoutEffect(() => {
+    if (id && id !== stateCurrentFilm?.id) {
+      dispatch(fetchFilm(id));
+      dispatch(fetchSimilar(id));
+      dispatch(fetchReviews(id));
+    }
+  }, [id, dispatch]);
 
   if (stateIsCurrentFilmLoading) {
     return (<Spinner/>);
@@ -37,12 +46,10 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
-
           <header className="page-header film-card__head">
             <Logo/>
             <HeaderUserBlock/>
           </header>
-
           <div className="film-card__wrap">
             <div className="film-card__desc">
               <h2 className="film-card__title">{stateCurrentFilm.name}</h2>
@@ -65,7 +72,10 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={ROUTES.REVIEW.replace(':id', stateCurrentFilm.id)} className="btn film-card__button">Add review</Link>
+                {
+                  stateAuthStatus === AuthStatus.AUTH &&
+                  <Link to={ROUTES.REVIEW.replace(':id', stateCurrentFilm.id)} className="btn film-card__button">Add review</Link>
+                }
               </div>
             </div>
           </div>
@@ -85,13 +95,13 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
-          <CatalogFilmList
-            genreFilter={stateCurrentFilm.genre}
-            maxCountFilter={4}
-            excludeFilmByIdFilter={stateCurrentFilm.id}
-          />
         </section>
+        {!!similar.length && (
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+            <CatalogFilmList list={similar} />
+          </section>
+        )}
 
         <Footer/>
       </div>
