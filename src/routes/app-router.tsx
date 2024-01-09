@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {ROUTES} from './routes-data.ts';
 import {Main} from '../pages/main.tsx';
-import {SignIn} from '../pages/signIn.tsx';
+import {SignIn} from '../pages/sign-in.tsx';
 import {MyList} from '../pages/my-list.tsx';
 import {MoviePage} from '../pages/movie-page.tsx';
 import {AddReview} from '../pages/add-review.tsx';

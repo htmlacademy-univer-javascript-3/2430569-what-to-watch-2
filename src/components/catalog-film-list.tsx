@@ -3,6 +3,7 @@ import {CatalogFilmListElement} from './catalog-film-list-element.tsx';
 import {useState} from 'react';
 import {useAppSelector} from '../store/hooks.ts';
 import {Spinner} from './spinner.tsx';
+import {ReducerName} from '../types/reducer-name.ts';
 
 interface Props {
   genreFilter?: string;
@@ -12,9 +13,9 @@ interface Props {
 
 export const CatalogFilmList = (props: Props) => {
   const [activeFilm, setActiveFilm] = useState<string | null>(null);
-  const stateFilms = useAppSelector((state) => state.films);
-  const stateAllFilms = useAppSelector((state) => state.allFilms);
-  const stateIsFilmsLoading = useAppSelector((state) => state.isFilmsLoading);
+  const stateFilms = useAppSelector((state) => state[ReducerName.Main].genreFilms);
+  const stateAllFilms = useAppSelector((state) => state[ReducerName.Main].films);
+  const stateIsFilmsLoading = useAppSelector((state) => state[ReducerName.Main].isFilmsLoading);
 
   const handleCardHover = (filmId: string) => {
     setActiveFilm(filmId);

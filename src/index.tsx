@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {App} from './app.tsx';
 import {store} from './store';
 import {Provider} from 'react-redux';
-import {fetchFilms} from './store/action.ts';
+import {fetchFilms} from './store/api-actions.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

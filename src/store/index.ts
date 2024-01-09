@@ -5,7 +5,7 @@ import {createAxios} from '../services/api.ts';
 export const axios = createAxios();
 
 export const store = configureStore({
-  reducer,
+  reducer: reducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {

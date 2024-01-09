@@ -6,17 +6,18 @@ import {ROUTES} from '../routes/routes-data.ts';
 import {MoviePageTabs} from '../components/movie-page-tabs.tsx';
 import {CatalogFilmList} from '../components/catalog-film-list.tsx';
 import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {fetchCurrentFilm} from '../store/action.ts';
 import {Spinner} from '../components/spinner.tsx';
+import {fetchFilm} from '../store/api-actions.ts';
+import {ReducerName} from '../types/reducer-name.ts';
 
 export const MoviePage = ({inList = false}: {inList?: boolean}) => {
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const stateCurrentFilm = useAppSelector((state) => state.currentFilm);
-  const stateIsCurrentFilmLoading = useAppSelector((state) => state.isCurrentFilmLoading);
+  const stateCurrentFilm = useAppSelector((state) => state[ReducerName.Film].film);
+  const stateIsCurrentFilmLoading = useAppSelector((state) => state[ReducerName.Film].isLoading);
 
   if (id && id !== stateCurrentFilm?.id) {
-    dispatch(fetchCurrentFilm(id));
+    dispatch(fetchFilm(id));
   }
 
   if (stateIsCurrentFilmLoading) {

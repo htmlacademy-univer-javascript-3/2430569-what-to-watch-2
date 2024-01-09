@@ -1,5 +1,5 @@
 import {useAppDispatch} from '../store/hooks.ts';
-import {setGenre} from '../store/action.ts';
+import {setGenre} from '../store/actions.ts';
 import {FormEvent, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -8,7 +8,7 @@ export const CatalogGenreListElement = ({genre, isActive = false}: {genre: strin
   const handleClick = useCallback(
     (event: FormEvent<HTMLAnchorElement>) => {
       event.preventDefault();
-      appDispatch(setGenre({ genre }));
+      appDispatch(setGenre(genre));
     },
     [appDispatch, genre]
   );
