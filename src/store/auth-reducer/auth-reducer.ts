@@ -1,13 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ReducerName } from '../../types/reducer-name';
 import { dropToken, saveToken } from '../../services/token';
-import {User} from '../../types/user.ts';
 import {AuthStatus} from '../../types/auth-status.ts';
 import {login, logout} from '../api-actions.ts';
-interface AuthState {
-  user: User | null;
-  authStatus: AuthStatus;
-}
+import {AuthState} from '../../types/auth-state.ts';
 
 const initialAuthState: AuthState = {
   authStatus: AuthStatus.NoAuth,

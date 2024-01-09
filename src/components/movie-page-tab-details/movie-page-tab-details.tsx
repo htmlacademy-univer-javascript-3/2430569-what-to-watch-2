@@ -18,7 +18,7 @@ const MoviePageTabDetailsComponent = ({film}: {film: Film}) => (
     </div>
 
     <div className="film-card__text-col">
-      <DetailsItem header="Run Time" description={`${(film.runTime / MINUTES_IN_HOUR).toFixed(0)}h ${film.runTime % MINUTES_IN_HOUR}m`}/>
+      <DetailsItem header="Run Time" description={`${Math.floor(film.runTime / MINUTES_IN_HOUR)}h ${film.runTime % MINUTES_IN_HOUR}m`}/>
       <DetailsItem header="Genre" description={film.genre}/>
       <DetailsItem header="Released" description={`${film.released}`}/>
     </div>
