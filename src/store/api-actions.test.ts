@@ -23,7 +23,7 @@ describe('async actions', () => {
     ThunkDispatch<State, typeof api, Action>
   >(middlewares);
 
-  it('should dispatch login when POST /login', async () => {
+  it('login on POST /login', async () => {
     mockAPI
       .onPost('/login')
       .reply(200, { token: 'token' });
@@ -41,7 +41,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('should dispatch logout on DELETE /logout', async () => {
+  it('logout on DELETE /logout', async () => {
     mockAPI
       .onDelete('/logout')
       .reply(204);
@@ -58,7 +58,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('should dispatch films when GET /films', async () => {
+  it('films on GET /films', async () => {
     mockAPI
       .onGet('/films')
       .reply(200, mockFilms);
@@ -75,7 +75,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('should dispatch promo film when GET /promo', async () => {
+  it('promo film on GET /promo', async () => {
     mockAPI
       .onGet('/promo')
       .reply(200, mockFilm);
@@ -92,7 +92,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('should fetch film when GET /films/{id}', async () => {
+  it('fetch film on GET /films/{id}', async () => {
     mockAPI
       .onGet('/films/1')
       .reply(200, mockFilm);
@@ -109,7 +109,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('should fetch similar films film when GET /films/{id}/similar', async () => {
+  it('films on GET /films/{id}/similar', async () => {
     mockAPI
       .onGet('/films/1/similar')
       .reply(200, mockFilms);
@@ -126,7 +126,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('should fetch similar films film when GET /comments/{id}', async () => {
+  it('similar films on GET /comments/{id}', async () => {
     mockAPI
       .onGet('/comments/1')
       .reply(200, mockReviews);
@@ -143,7 +143,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('POST /comments/{id}', async () => {
+  it('comments on POST /comments/{id}', async () => {
     const postData = {
       filmId: '1',
       comment: 'comment',
@@ -170,7 +170,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('should fetch favorite films film when GET /favorite', async () => {
+  it('favorite films on GET /favorite', async () => {
     mockAPI
       .onGet('/favorite')
       .reply(200, mockFilms);
@@ -187,7 +187,7 @@ describe('async actions', () => {
     ]);
   });
 
-  it('POST /favorite/{filmId}/{status}', async () => {
+  it('favorite films on POST /favorite/{filmId}/{status}', async () => {
     const postData = {
       filmId: '1',
       status: true

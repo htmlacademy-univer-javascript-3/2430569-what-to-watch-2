@@ -1,11 +1,7 @@
 import {ReducerName} from '../../types/reducer-name.ts';
 import {useAppSelector} from '../../store/hooks.ts';
 import {memo} from 'react';
-
-const getDateString = (postDate: Date) =>
-  `${postDate.toLocaleString('eng', {
-    month: 'long',
-  })} ${postDate.getDate()}, ${postDate.getFullYear()}`;
+import {getDateString} from '../../utils/date.ts';
 
 const MoviePageTabReviewsElemComponent = ({text, author, date, rating}: {text: string; author: string; date: string; rating: number}) => (
   <div className="review">

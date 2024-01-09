@@ -73,6 +73,7 @@ const PlayerComponent = ({film}: {film: Film}) => {
         className="player__video"
         poster={film.posterImage}
         onTimeUpdate={handleVideoTimeUpdate}
+        data-testid={'video'}
       >
         <source src={film.videoLink} type="video/mp4"/>
       </video>
