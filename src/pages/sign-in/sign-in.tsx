@@ -1,12 +1,12 @@
-import {Logo} from '../components/logo.tsx';
-import {Footer} from '../components/footer.tsx';
+import {Logo} from '../../components/logo/logo.tsx';
+import {Footer} from '../../components/footer/footer.tsx';
 import {Navigate} from 'react-router-dom';
 import {memo, useState} from 'react';
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {ReducerName} from '../types/reducer-name.ts';
-import {AuthStatus} from '../types/auth-status.ts';
-import {RoutesData} from '../routes/routes-data.ts';
-import {login} from '../store/api-actions.ts';
+import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
+import {ReducerName} from '../../types/reducer-name.ts';
+import {AuthStatus} from '../../types/auth-status.ts';
+import {RoutesData} from '../../routes/routes-data.ts';
+import {login} from '../../store/api-actions.ts';
 
 const EMAIL_PATTERN = /^[\w\d._-]+@[\w\d.-]+\.[\w]{2,4}$/;
 
@@ -36,7 +36,9 @@ const SignInComponent = () => {
     setPassword(value);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const MIN_PASSWORD_LENGTH = 3;
+
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setError('');
     event.preventDefault();
     if (!EMAIL_PATTERN.test(email)) {
@@ -47,7 +49,7 @@ const SignInComponent = () => {
       return setError('Passwords must contain: a minimum of 1 letter and a minimum of 1 numeric character');
     }
 
-    if (password.length < 3) {
+    if (password.length < MIN_PASSWORD_LENGTH) {
       return setError('We can’t recognize this email\n and password combination. Please try again');
     }
 
@@ -61,7 +63,7 @@ const SignInComponent = () => {
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+        <form action="#" className="sign-in__form" onSubmit={handleFormSubmit}>
           {error ? <SignInMessage text={error}/> : null}
           <div className="sign-in__fields">
             <div className="sign-in__field">

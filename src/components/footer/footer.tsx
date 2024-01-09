@@ -1,4 +1,4 @@
-import {Logo} from './logo.tsx';
+import {Logo} from '../logo/logo.tsx';
 import {memo} from 'react';
 
 const FooterComponent = () => (

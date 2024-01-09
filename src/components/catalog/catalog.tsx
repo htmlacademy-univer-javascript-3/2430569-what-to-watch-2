@@ -1,8 +1,8 @@
-import {CatalogGenreList} from './catalog-genre-list.tsx';
-import {CatalogFilmList} from './catalog-film-list.tsx';
-import {useAppSelector} from '../store/hooks.ts';
+import {CatalogGenreList} from '../catalog-genre-list/catalog-genre-list.tsx';
+import {CatalogFilmList} from '../catalog-film-list/catalog-film-list.tsx';
+import {useAppSelector} from '../../store/hooks.ts';
 import {memo, useCallback, useEffect, useState} from 'react';
-import {ReducerName} from '../types/reducer-name.ts';
+import {ReducerName} from '../../types/reducer-name.ts';
 
 interface Props {
   withoutGenres?: boolean;
@@ -21,7 +21,7 @@ const CatalogComponent = ({withoutGenres = false, withoutShowMoreButton = false}
   const LIST_LENGTH_STEP = 8;
   const stateFilms = useAppSelector((state) => state[ReducerName.Main].genreFilms);
   const [length, setLength] = useState(LIST_LENGTH_STEP);
-  const handleClick = useCallback(()=>{
+  const handleButtonClick = useCallback(()=>{
     setLength((prev) => prev + LIST_LENGTH_STEP);
   },[]);
 
@@ -34,7 +34,7 @@ const CatalogComponent = ({withoutGenres = false, withoutShowMoreButton = false}
       <h2 className="catalog__title visually-hidden">Catalog</h2>
       {!withoutGenres ? <CatalogGenreList/> : null}
       <CatalogFilmList maxCountFilter={length}/>
-      {!withoutShowMoreButton && stateFilms.length > length ? <CatalogShowMoreButton onClick={handleClick}/> : null}
+      {!withoutShowMoreButton && stateFilms.length > length ? <CatalogShowMoreButton onClick={handleButtonClick}/> : null}
     </section>
   );
 };

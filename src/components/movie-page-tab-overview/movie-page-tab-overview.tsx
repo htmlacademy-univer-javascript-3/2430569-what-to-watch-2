@@ -1,5 +1,5 @@
-import {convertFilmRating} from '../utils/rating.ts';
-import {Film} from '../types/film.ts';
+import {convertFilmRating} from '../../utils/rating.ts';
+import {Film} from '../../types/film.ts';
 import {memo} from 'react';
 
 const MoviePageTabOverviewComponent = ({film}: {film: Film}) => (

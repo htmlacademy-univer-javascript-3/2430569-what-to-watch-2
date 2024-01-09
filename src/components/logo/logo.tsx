@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {RoutesData} from '../routes/routes-data.ts';
+import {RoutesData} from '../../routes/routes-data.ts';
 import {memo} from 'react';
 
 interface Props {

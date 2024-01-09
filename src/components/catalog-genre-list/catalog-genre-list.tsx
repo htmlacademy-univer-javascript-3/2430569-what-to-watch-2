@@ -1,8 +1,8 @@
-import {CatalogGenreListElement} from './catalog-genre-list-element.tsx';
+import {CatalogGenreListElement} from '../catalog-genre-list-element/catalog-genre-list-element.tsx';
 import {memo, useMemo} from 'react';
-import {useAppSelector} from '../store/hooks.ts';
-import {Genre} from '../types/genre.ts';
-import {ReducerName} from '../types/reducer-name.ts';
+import {useAppSelector} from '../../store/hooks.ts';
+import {Genre} from '../../types/genre.ts';
+import {ReducerName} from '../../types/reducer-name.ts';
 
 const CatalogGenreListComponent = () => {
   const stateAllFilms = useAppSelector((state) => state[ReducerName.Main].films);

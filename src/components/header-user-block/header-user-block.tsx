@@ -1,9 +1,9 @@
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {ReducerName} from '../types/reducer-name.ts';
-import {logout} from '../store/api-actions.ts';
-import {AuthStatus} from '../types/auth-status.ts';
+import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
+import {ReducerName} from '../../types/reducer-name.ts';
+import {logout} from '../../store/api-actions.ts';
+import {AuthStatus} from '../../types/auth-status.ts';
 import {Link} from 'react-router-dom';
-import {RoutesData} from '../routes/routes-data.ts';
+import {RoutesData} from '../../routes/routes-data.ts';
 import {memo} from 'react';
 
 const HeaderUserBlockComponent = () => {

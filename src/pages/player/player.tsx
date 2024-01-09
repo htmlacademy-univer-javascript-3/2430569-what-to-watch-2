@@ -1,13 +1,13 @@
 import {memo, useEffect, useRef, useState} from 'react';
-import {Icon} from '../components/icon/icon.tsx';
-import {ICONS} from '../components/icon/icons.ts';
+import {Icon} from '../../components/icon/icon.tsx';
+import {ICONS} from '../../components/icon/icons.ts';
 import {useNavigate, useParams} from 'react-router-dom';
-import {Film} from '../types/film.ts';
-import {NotFoundPage} from './not-found-page.tsx';
-import {Spinner} from '../components/spinner/spinner.tsx';
-import {fetchFilm} from '../store/api-actions.ts';
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {ReducerName} from '../types/reducer-name.ts';
+import {Film} from '../../types/film.ts';
+import {NotFoundPage} from '../not-found-page/not-found-page.tsx';
+import {Spinner} from '../../components/spinner/spinner.tsx';
+import {fetchFilm} from '../../store/api-actions.ts';
+import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
+import {ReducerName} from '../../types/reducer-name.ts';
 
 const SECONDS_IN_HOUR = 3600;
 const SECONDS_IN_MINUTE = 60;
@@ -40,7 +40,7 @@ const PlayerComponent = ({film}: {film: Film}) => {
     }
   };
 
-  const handlePlayPauseToggle = () => {
+  const handlePlayPauseButtonClick = () => {
     if (isPause) {
       videoRef.current?.pause();
     } else {
@@ -49,18 +49,18 @@ const PlayerComponent = ({film}: {film: Film}) => {
     setIsPause(!isPause);
   };
 
-  const handleFullscreenToggle = () => {
+  const handleFullscreenClick = () => {
     videoRef.current?.requestFullscreen();
   };
 
-  const handleTimeUpdate = () => {
+  const handleVideoTimeUpdate = () => {
     if (videoRef.current) {
       setLastTime(videoRef.current?.currentTime);
       setProgress((videoRef.current?.currentTime / film.runTime) * 100);
     }
   };
 
-  const handleExit = () => {
+  const handleExitButtonClick = () => {
     navigate(-1);
   };
 
@@ -72,12 +72,12 @@ const PlayerComponent = ({film}: {film: Film}) => {
         src={film.videoLink}
         className="player__video"
         poster={film.posterImage}
-        onTimeUpdate={handleTimeUpdate}
+        onTimeUpdate={handleVideoTimeUpdate}
       >
         <source src={film.videoLink} type="video/mp4"/>
       </video>
 
-      <button type="button" className="player__exit" onClick={handleExit}>Exit</button>
+      <button type="button" className="player__exit" onClick={handleExitButtonClick}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -89,14 +89,14 @@ const PlayerComponent = ({film}: {film: Film}) => {
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play" onClick={handlePlayPauseToggle}>
+          <button type="button" className="player__play" onClick={handlePlayPauseButtonClick}>
             {
               isPause ? <><Icon {...ICONS.PLAY_START}/><span>Play</span></>
                 : <><Icon {...ICONS.PAUSE}/><span>Pause</span></>
             }
           </button>
           <div className="player__name">{film.name}</div>
-          <button type="button" className="player__full-screen" onClick={handleFullscreenToggle}>
+          <button type="button" className="player__full-screen" onClick={handleFullscreenClick}>
             <Icon {...ICONS.FULL_SCREEN}/>
             <span>Full screen</span>
           </button>

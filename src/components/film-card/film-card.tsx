@@ -1,17 +1,14 @@
-import {Logo} from './logo.tsx';
-import {HeaderUserBlock} from './header-user-block.tsx';
-import {Film} from '../types/film.ts';
+import {Logo} from '../logo/logo.tsx';
+import {HeaderUserBlock} from '../header-user-block/header-user-block.tsx';
+import {Film} from '../../types/film.ts';
 import {memo} from 'react';
-import {FilmCardButtons} from './film-card-buttons.tsx';
-import {NotFoundPage} from '../pages/not-found-page.tsx';
+import {FilmCardButtons} from '../film-card-buttons/film-card-buttons.tsx';
+import {NotFoundPage} from '../../pages/not-found-page/not-found-page.tsx';
 
 const FilmCardComponent = ({film}: {film: Film | undefined}) => {
-
-
   if (!film) {
     return (<NotFoundPage/>);
   }
-
 
   return (
     <section className="film-card">

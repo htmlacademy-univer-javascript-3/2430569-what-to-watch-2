@@ -1,13 +1,13 @@
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {ReducerName} from '../types/reducer-name.ts';
+import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
+import {ReducerName} from '../../types/reducer-name.ts';
 import {Link, useNavigate} from 'react-router-dom';
-import {RoutesData} from '../routes/routes-data.ts';
+import {RoutesData} from '../../routes/routes-data.ts';
 import {memo} from 'react';
-import {AuthStatus} from '../types/auth-status.ts';
-import {fetchFavoriteFilms, setFavorite} from '../store/api-actions.ts';
-import {Film} from '../types/film.ts';
-import {Icon} from './icon/icon.tsx';
-import {ICONS} from './icon/icons.ts';
+import {AuthStatus} from '../../types/auth-status.ts';
+import {fetchFavoriteFilms, setFavorite} from '../../store/api-actions.ts';
+import {Film} from '../../types/film.ts';
+import {Icon} from '../icon/icon.tsx';
+import {ICONS} from '../icon/icons.ts';
 
 const FilmCardButtonsComponent = ({film, withAddReviewButton = false}: {film: Film; withAddReviewButton?: boolean}) => {
   const stateFavoriteCount = useAppSelector((state) => state[ReducerName.Main].favoriteCount);
@@ -17,10 +17,10 @@ const FilmCardButtonsComponent = ({film, withAddReviewButton = false}: {film: Fi
 
   const isAuth = stateAuthStatus === AuthStatus.Auth;
 
-  const handleClickPlay = () => {
+  const handlePlayButtonClick = () => {
     navigate(RoutesData.Player.replace(':id', film.id));
   };
-  const handleClickMyList = () => {
+  const handleMyListButtonClick = () => {
     if (!isAuth) {
       navigate(RoutesData.SignIn);
     } else {
@@ -31,11 +31,11 @@ const FilmCardButtonsComponent = ({film, withAddReviewButton = false}: {film: Fi
 
   return (
     <div className="film-card__buttons">
-      <button className="btn btn--play film-card__button" type="button" onClick={handleClickPlay}>
+      <button className="btn btn--play film-card__button" type="button" onClick={handlePlayButtonClick}>
         <Icon {...ICONS.PLAY_START}/>
         <span>Play</span>
       </button>
-      <button className="btn btn--list film-card__button" type="button" onClick={handleClickMyList}>
+      <button className="btn btn--list film-card__button" type="button" onClick={handleMyListButtonClick}>
         {isAuth && film.isFavorite ? <Icon {...ICONS.IN_LIST}/> : <Icon {...ICONS.ADD}/>}
         <span>My list</span>
         <span className="film-card__count">{isAuth ? stateFavoriteCount : 0}</span>

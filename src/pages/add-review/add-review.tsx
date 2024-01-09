@@ -1,14 +1,14 @@
-import {Logo} from '../components/logo.tsx';
-import {HeaderUserBlock} from '../components/header-user-block.tsx';
-import {RoutesData} from '../routes/routes-data.ts';
+import {Logo} from '../../components/logo/logo.tsx';
+import {HeaderUserBlock} from '../../components/header-user-block/header-user-block.tsx';
+import {RoutesData} from '../../routes/routes-data.ts';
 import {Link, useParams} from 'react-router-dom';
-import {AddReviewForm} from '../components/add-review-form.tsx';
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {Spinner} from '../components/spinner/spinner.tsx';
-import {ReducerName} from '../types/reducer-name.ts';
-import {fetchFilm} from '../store/api-actions.ts';
+import {AddReviewForm} from '../../components/add-review-form/add-review-form.tsx';
+import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
+import {Spinner} from '../../components/spinner/spinner.tsx';
+import {ReducerName} from '../../types/reducer-name.ts';
+import {fetchFilm} from '../../store/api-actions.ts';
 import {memo} from 'react';
-import {NotFoundPage} from './not-found-page.tsx';
+import {NotFoundPage} from '../not-found-page/not-found-page.tsx';
 
 const AddReviewComponent = () => {
   const {id} = useParams();

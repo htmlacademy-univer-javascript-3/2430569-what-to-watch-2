@@ -1,6 +1,6 @@
 import {ChangeEvent, Fragment, memo, useCallback, useState} from 'react';
-import {addReview, fetchReviews} from '../store/api-actions.ts';
-import {useAppDispatch} from '../store/hooks.ts';
+import {addReview, fetchReviews} from '../../store/api-actions.ts';
+import {useAppDispatch} from '../../store/hooks.ts';
 import {useNavigate} from 'react-router-dom';
 
 const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
@@ -12,12 +12,12 @@ const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleChangeFormData = useCallback((event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleFormDataChange = useCallback((event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = event.target;
     setFormData({...formData, [name]: value});
   }, [formData]);
 
-  const handleSubmit = useCallback(
+  const handleFormSubmit = useCallback(
     (event: React.FormEvent) => {
       event.preventDefault();
       setIsSending(true);
@@ -32,22 +32,28 @@ const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
     [dispatch, filmId, navigate, formData]
   );
 
+  const enum CommentLength {
+    Min = 50,
+    Max = 400,
+  }
+  const MAX_RATING = 10;
+
   const isValidFormData =
     !isSending &&
     formData.rating !== 0 &&
-    formData.comment.length >= 50 &&
-    formData.comment.length <= 400;
+    formData.comment.length >= CommentLength.Min &&
+    formData.comment.length <= CommentLength.Max;
 
   return (
-    <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+    <form action="#" className="add-review__form" onSubmit={handleFormSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {
-            Array.from({length: 10}).map((_, index) => {
-              const value = 10 - index;
+            Array.from({length: MAX_RATING}).map((_, index) => {
+              const value = MAX_RATING - index;
               return (
                 <Fragment key={value}>
-                  <input className="rating__input" id={`star-${value}`} type="radio" name="rating" value={`${value}`} onChange={handleChangeFormData}/>
+                  <input className="rating__input" id={`star-${value}`} type="radio" name="rating" value={`${value}`} onChange={handleFormDataChange}/>
                   <label className="rating__label" htmlFor={`star-${value}`}>Rating {value}</label>
                 </Fragment>
               );
@@ -62,7 +68,7 @@ const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
           name="comment"
           id="comment"
           placeholder="Review text"
-          onChange={handleChangeFormData}
+          onChange={handleFormDataChange}
           value={formData.comment}
         />
         <div className="add-review__submit">

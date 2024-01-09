@@ -1,4 +1,4 @@
-import {RoutesData} from '../routes/routes-data.ts';
+import {RoutesData} from '../../routes/routes-data.ts';
 import {Link} from 'react-router-dom';
 import {memo} from 'react';
 

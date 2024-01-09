@@ -1,4 +1,4 @@
-import {Film} from '../types/film.ts';
+import {Film} from '../../types/film.ts';
 import {memo} from 'react';
 
 const DetailsItem = ({header, description}: {header: string; description: string}) => (
@@ -8,6 +8,8 @@ const DetailsItem = ({header, description}: {header: string; description: string
   </p>
 );
 
+const MINUTES_IN_HOUR = 60;
+
 const MoviePageTabDetailsComponent = ({film}: {film: Film}) => (
   <div className="film-card__text film-card__row">
     <div className="film-card__text-col">
@@ -16,7 +18,7 @@ const MoviePageTabDetailsComponent = ({film}: {film: Film}) => (
     </div>
 
     <div className="film-card__text-col">
-      <DetailsItem header="Run Time" description={`${(film.runTime / 60).toFixed(0)}h ${film.runTime % 60}m`}/>
+      <DetailsItem header="Run Time" description={`${(film.runTime / MINUTES_IN_HOUR).toFixed(0)}h ${film.runTime % MINUTES_IN_HOUR}m`}/>
       <DetailsItem header="Genre" description={film.genre}/>
       <DetailsItem header="Released" description={`${film.released}`}/>
     </div>

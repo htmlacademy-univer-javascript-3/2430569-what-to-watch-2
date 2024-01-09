@@ -1,10 +1,10 @@
-import {Footer} from '../components/footer.tsx';
-import {Logo} from '../components/logo.tsx';
-import {HeaderUserBlock} from '../components/header-user-block.tsx';
+import {Footer} from '../../components/footer/footer.tsx';
+import {Logo} from '../../components/logo/logo.tsx';
+import {HeaderUserBlock} from '../../components/header-user-block/header-user-block.tsx';
 import {memo} from 'react';
-import {useAppSelector} from '../store/hooks.ts';
-import {ReducerName} from '../types/reducer-name.ts';
-import {CatalogFilmList} from '../components/catalog-film-list.tsx';
+import {useAppSelector} from '../../store/hooks.ts';
+import {ReducerName} from '../../types/reducer-name.ts';
+import {CatalogFilmList} from '../../components/catalog-film-list/catalog-film-list.tsx';
 
 const MyListComponent = () => {
   const stateFavoriteCount = useAppSelector((state) => state[ReducerName.Main].favoriteCount);

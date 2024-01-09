@@ -1,8 +1,8 @@
 import {memo, useCallback} from 'react';
 import {Link} from 'react-router-dom';
-import {RoutesData} from '../routes/routes-data.ts';
-import {VideoPlayer} from './video-player.tsx';
-import {FilmListElement} from '../types/film.ts';
+import {RoutesData} from '../../routes/routes-data.ts';
+import {VideoPlayer} from '../video-player/video-player.tsx';
+import {FilmListElement} from '../../types/film.ts';
 
 interface Props {
   film: FilmListElement;

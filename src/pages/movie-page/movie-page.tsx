@@ -1,16 +1,16 @@
-import {Logo} from '../components/logo.tsx';
-import {Footer} from '../components/footer.tsx';
-import {HeaderUserBlock} from '../components/header-user-block.tsx';
+import {Logo} from '../../components/logo/logo.tsx';
+import {Footer} from '../../components/footer/footer.tsx';
+import {HeaderUserBlock} from '../../components/header-user-block/header-user-block.tsx';
 import {useParams} from 'react-router-dom';
-import {MoviePageTabs} from '../components/movie-page-tabs.tsx';
-import {CatalogFilmList} from '../components/catalog-film-list.tsx';
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {Spinner} from '../components/spinner/spinner.tsx';
-import {fetchFilm, fetchReviews, fetchSimilar} from '../store/api-actions.ts';
-import {ReducerName} from '../types/reducer-name.ts';
+import {MoviePageTabs} from '../../components/movie-page-tabs/movie-page-tabs.tsx';
+import {CatalogFilmList} from '../../components/catalog-film-list/catalog-film-list.tsx';
+import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
+import {Spinner} from '../../components/spinner/spinner.tsx';
+import {fetchFilm, fetchReviews, fetchSimilar} from '../../store/api-actions.ts';
+import {ReducerName} from '../../types/reducer-name.ts';
 import {memo, useLayoutEffect} from 'react';
-import {FilmCardButtons} from '../components/film-card-buttons.tsx';
-import {NotFoundPage} from './not-found-page.tsx';
+import {FilmCardButtons} from '../../components/film-card-buttons/film-card-buttons.tsx';
+import {NotFoundPage} from '../not-found-page/not-found-page.tsx';
 
 const MAX_COUNT_SIMILAR_FILMS = 4;
 
