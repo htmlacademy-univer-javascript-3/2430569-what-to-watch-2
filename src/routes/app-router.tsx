@@ -1,12 +1,12 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {RoutesData} from './routes-data.ts';
-import {Main} from '../pages/main.tsx';
-import {SignIn} from '../pages/sign-in.tsx';
-import {MyList} from '../pages/my-list.tsx';
-import {MoviePage} from '../pages/movie-page.tsx';
-import {AddReview} from '../pages/add-review.tsx';
-import {Player} from '../pages/player.tsx';
-import {NotFoundPage} from '../pages/not-found-page.tsx';
+import {Main} from '../pages/main/main.tsx';
+import {SignIn} from '../pages/sign-in/sign-in.tsx';
+import {MyList} from '../pages/my-list/my-list.tsx';
+import {MoviePage} from '../pages/movie-page/movie-page.tsx';
+import {AddReview} from '../pages/add-review/add-review.tsx';
+import {Player} from '../pages/player/player.tsx';
+import {NotFoundPage} from '../pages/not-found-page/not-found-page.tsx';
 import {PrivateRoute} from './private-route.tsx';
 
 export const AppRouter = () => (

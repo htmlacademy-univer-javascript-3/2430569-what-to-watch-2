@@ -3,7 +3,7 @@ import {ReducerName} from '../../types/reducer-name.ts';
 import {setError, setGenre} from '../actions.ts';
 import {Film} from '../../types/film.ts';
 import {Genre} from '../../types/genre.ts';
-import {fetchFavoriteFilms, fetchFilms, fetchPromo, setFavorite} from '../api-actions.ts';
+import {fetchFavoriteFilms, fetchFilms, fetchPromo, logout, setFavorite} from '../api-actions.ts';
 
 interface MainState {
   films: Film[];
@@ -68,6 +68,10 @@ export const mainReducer = createSlice({
           state.promo = action.payload;
         }
         state.favoriteCount += action.payload.isFavorite ? 1 : -1;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.favoriteFilms = [];
+        state.favoriteCount = 0;
       });
   },
 }).reducer;

@@ -19,19 +19,6 @@ export const fetchFilms = createAsyncThunk<
   return data;
 });
 
-export const checkAuth = createAsyncThunk<
-  User,
-  undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->('/checkAuth', async (_arg, { extra: api }) => {
-  const { data } = await api.get<User>('/login');
-  return data;
-});
-
 export const login = createAsyncThunk<
   User,
   AuthData,
