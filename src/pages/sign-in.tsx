@@ -37,6 +37,7 @@ const SignInComponent = () => {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setError('');
     event.preventDefault();
     if (!EMAIL_PATTERN.test(email)) {
       return setError('Please enter a valid email address');
@@ -57,10 +58,8 @@ const SignInComponent = () => {
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo/>
-
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
-
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
           {error ? <SignInMessage text={error}/> : null}
@@ -83,7 +82,6 @@ const SignInComponent = () => {
           </div>
         </form>
       </div>
-
       <Footer/>
     </div>
   );

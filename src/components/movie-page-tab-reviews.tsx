@@ -31,7 +31,7 @@ const MoviePageTabReviewsComponent = () => {
         {stateReviews.slice(stateReviews.length / 2, stateReviews.length).map((review) => (
           <MoviePageTabReviewsElem
             key={review.id}
-            author={review.user.name}
+            author={review.user}
             text={review.comment}
             date={review.date}
             rating={review.rating}
@@ -42,7 +42,7 @@ const MoviePageTabReviewsComponent = () => {
         {stateReviews.slice(0, stateReviews.length / 2).map((review) => (
           <MoviePageTabReviewsElem
             key={review.id}
-            author={review.user.name}
+            author={review.user}
             text={review.comment}
             date={review.date}
             rating={review.rating}

@@ -1,13 +1,14 @@
 import {Logo} from '../components/logo.tsx';
 import {HeaderUserBlock} from '../components/header-user-block.tsx';
 import {RoutesData} from '../routes/routes-data.ts';
-import {Link, Navigate, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {AddReviewForm} from '../components/add-review-form.tsx';
 import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {Spinner} from '../components/spinner.tsx';
+import {Spinner} from '../components/spinner/spinner.tsx';
 import {ReducerName} from '../types/reducer-name.ts';
 import {fetchFilm} from '../store/api-actions.ts';
 import {memo} from 'react';
+import {NotFoundPage} from './not-found-page.tsx';
 
 const AddReviewComponent = () => {
   const {id} = useParams();
@@ -24,7 +25,7 @@ const AddReviewComponent = () => {
   }
 
   if (!stateFilm) {
-    return (<Navigate to={RoutesData.NotFound}/>);
+    return (<NotFoundPage/>);
   }
 
   return (

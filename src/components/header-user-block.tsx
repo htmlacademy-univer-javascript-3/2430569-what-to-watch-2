@@ -20,9 +20,11 @@ const HeaderUserBlockComponent = () => {
       {
         stateAuthStatus === AuthStatus.Auth && (
           <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src={stateUser?.avatarUrl} alt="User avatar" width="63" height="63"/>
-            </div>
+            <Link to={RoutesData.MyList}>
+              <div className="user-block__avatar">
+                <img src={stateUser?.avatarUrl} alt="User avatar" width="63" height="63"/>
+              </div>
+            </Link>
           </li>
         )
       }

@@ -3,8 +3,5 @@ export interface Review {
   date: string;
   id: number;
   rating: number;
-  user: {
-    id: number;
-    name: string;
-  };
+  user: string;
 }

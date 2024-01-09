@@ -8,6 +8,7 @@ const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
     rating: 0,
     comment: '',
   });
+  const [isSending, setIsSending] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
   const handleSubmit = useCallback(
     (event: React.FormEvent) => {
       event.preventDefault();
-
+      setIsSending(true);
       dispatch(
         addReview({ filmId: filmId, rating: +formData.rating, comment: formData.comment })
       ).then(() => {
@@ -30,6 +31,12 @@ const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
     },
     [dispatch, filmId, navigate, formData]
   );
+
+  const isValidFormData =
+    !isSending &&
+    formData.rating !== 0 &&
+    formData.comment.length >= 50 &&
+    formData.comment.length <= 400;
 
   return (
     <form action="#" className="add-review__form" onSubmit={handleSubmit}>
@@ -59,7 +66,7 @@ const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
           value={formData.comment}
         />
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" type="submit" disabled={!isValidFormData}>Post</button>
         </div>
       </div>
     </form>);

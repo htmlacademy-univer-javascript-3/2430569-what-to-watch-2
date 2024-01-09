@@ -2,7 +2,7 @@
 import {CatalogFilmListElement} from './catalog-film-list-element.tsx';
 import {memo, useState} from 'react';
 import {useAppSelector} from '../store/hooks.ts';
-import {Spinner} from './spinner.tsx';
+import {Spinner} from './spinner/spinner.tsx';
 import {ReducerName} from '../types/reducer-name.ts';
 import {Film} from '../types/film.ts';
 

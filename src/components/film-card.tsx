@@ -1,14 +1,17 @@
 import {Logo} from './logo.tsx';
 import {HeaderUserBlock} from './header-user-block.tsx';
-import {RoutesData} from '../routes/routes-data.ts';
-import {Navigate} from 'react-router-dom';
 import {Film} from '../types/film.ts';
 import {memo} from 'react';
+import {FilmCardButtons} from './film-card-buttons.tsx';
+import {NotFoundPage} from '../pages/not-found-page.tsx';
 
 const FilmCardComponent = ({film}: {film: Film | undefined}) => {
+
+
   if (!film) {
-    return (<Navigate to={RoutesData.NotFound}/>);
+    return (<NotFoundPage/>);
   }
+
 
   return (
     <section className="film-card">
@@ -36,21 +39,7 @@ const FilmCardComponent = ({film}: {film: Film | undefined}) => {
               <span className="film-card__year">{film.released}</span>
             </p>
 
-            <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
-              <button className="btn btn--list film-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-                <span className="film-card__count">9</span>
-              </button>
-            </div>
+            <FilmCardButtons film={film}/>
           </div>
         </div>
       </div>

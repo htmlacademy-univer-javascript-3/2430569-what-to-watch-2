@@ -1,24 +1,25 @@
 import {Logo} from '../components/logo.tsx';
 import {Footer} from '../components/footer.tsx';
 import {HeaderUserBlock} from '../components/header-user-block.tsx';
-import {Link, Navigate, useParams} from 'react-router-dom';
-import {RoutesData} from '../routes/routes-data.ts';
+import {useParams} from 'react-router-dom';
 import {MoviePageTabs} from '../components/movie-page-tabs.tsx';
 import {CatalogFilmList} from '../components/catalog-film-list.tsx';
 import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {Spinner} from '../components/spinner.tsx';
+import {Spinner} from '../components/spinner/spinner.tsx';
 import {fetchFilm, fetchReviews, fetchSimilar} from '../store/api-actions.ts';
 import {ReducerName} from '../types/reducer-name.ts';
-import {AuthStatus} from '../types/auth-status.ts';
 import {memo, useLayoutEffect} from 'react';
+import {FilmCardButtons} from '../components/film-card-buttons.tsx';
+import {NotFoundPage} from './not-found-page.tsx';
 
-const MoviePageComponent = ({inList = false}: {inList?: boolean}) => {
+const MAX_COUNT_SIMILAR_FILMS = 4;
+
+const MoviePageComponent = () => {
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const stateCurrentFilm = useAppSelector((state) => state[ReducerName.Film].film);
   const stateIsCurrentFilmLoading = useAppSelector((state) => state[ReducerName.Film].isLoading);
   const similar = useAppSelector((state) => state[ReducerName.Film].similar);
-  const stateAuthStatus = useAppSelector((state) => state[ReducerName.Auth].authStatus);
 
 
   useLayoutEffect(() => {
@@ -34,7 +35,7 @@ const MoviePageComponent = ({inList = false}: {inList?: boolean}) => {
   }
 
   if (!stateCurrentFilm) {
-    return (<Navigate to={RoutesData.NotFound}/>);
+    return (<NotFoundPage/>);
   }
 
   return (
@@ -57,26 +58,7 @@ const MoviePageComponent = ({inList = false}: {inList?: boolean}) => {
                 <span className="film-card__genre">{stateCurrentFilm.genre}</span>
                 <span className="film-card__year">{stateCurrentFilm.released}</span>
               </p>
-
-              <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref={inList ? '#in-list' : '#add'}></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
-                {
-                  stateAuthStatus === AuthStatus.Auth &&
-                  <Link to={RoutesData.Review.replace(':id', stateCurrentFilm.id)} className="btn film-card__button">Add review</Link>
-                }
-              </div>
+              <FilmCardButtons film={stateCurrentFilm} withAddReviewButton/>
             </div>
           </div>
         </div>
@@ -86,23 +68,17 @@ const MoviePageComponent = ({inList = false}: {inList?: boolean}) => {
             <div className="film-card__poster film-card__poster--big">
               <img src={stateCurrentFilm.posterImage} alt={stateCurrentFilm.name} width="218" height="327"/>
             </div>
-
             <MoviePageTabs film={stateCurrentFilm}/>
           </div>
         </div>
       </section>
-
       <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-        </section>
         {!!similar.length && (
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <CatalogFilmList list={similar} />
+            <CatalogFilmList list={similar} maxCountFilter={MAX_COUNT_SIMILAR_FILMS}/>
           </section>
         )}
-
         <Footer/>
       </div>
     </>
