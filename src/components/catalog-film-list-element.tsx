@@ -22,13 +22,15 @@ export const CatalogFilmListElement = (props: Props) => {
       onMouseLeave={props.onMouseLeave}
       data-active={props.isActive}
     >
-      <div className="small-film-card__image">
-        {props.isActive ? (
-          <VideoPlayer src={props.film.previewVideoLink} poster={props.film.previewImage} />
-        ) : (
-          <img src={props.film.previewImage} alt={props.film.name} width="280" height="175"/>
-        )}
-      </div>
+      <Link to={ROUTES.FILM.replace(':id', props.film.id)}>
+        <div className="small-film-card__image">
+          {props.isActive ? (
+            <VideoPlayer src={props.film.previewVideoLink} poster={props.film.previewImage} />
+          ) : (
+            <img src={props.film.previewImage} alt={props.film.name} width="280" height="175"/>
+          )}
+        </div>
+      </Link>
       <h3 className="small-film-card__title">
         <Link to={ROUTES.FILM.replace(':id', props.film.id)} className="small-film-card__link">{props.film.name}</Link>
       </h3>

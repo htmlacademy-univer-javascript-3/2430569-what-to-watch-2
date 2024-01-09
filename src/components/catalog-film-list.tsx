@@ -4,17 +4,16 @@ import {useState} from 'react';
 import {useAppSelector} from '../store/hooks.ts';
 import {Spinner} from './spinner.tsx';
 import {ReducerName} from '../types/reducer-name.ts';
+import {Film} from "../types/film.ts";
 
 interface Props {
-  genreFilter?: string;
-  maxCountFilter: number;
-  excludeFilmByIdFilter?: string;
+  maxCountFilter?: number;
+  list?: Film[];
 }
 
 export const CatalogFilmList = (props: Props) => {
   const [activeFilm, setActiveFilm] = useState<string | null>(null);
   const stateFilms = useAppSelector((state) => state[ReducerName.Main].genreFilms);
-  const stateAllFilms = useAppSelector((state) => state[ReducerName.Main].films);
   const stateIsFilmsLoading = useAppSelector((state) => state[ReducerName.Main].isFilmsLoading);
 
   const handleCardHover = (filmId: string) => {
@@ -24,18 +23,15 @@ export const CatalogFilmList = (props: Props) => {
     setActiveFilm(null);
   };
 
-  const filmList = props.genreFilter ?
-    stateAllFilms.filter((item) => props.genreFilter === item.genre) :
-    stateFilms;
+  const filmList = props.list ? props.list : stateFilms;
 
-  if (stateIsFilmsLoading) {
+  if (!props.list && stateIsFilmsLoading) {
     return (<Spinner/>);
   }
 
   return (
     <div className="catalog__films-list">
       {filmList
-        .filter((item) => !props.excludeFilmByIdFilter || props.excludeFilmByIdFilter !== item.id)
         .map((item) => (
           <CatalogFilmListElement
             film={item}

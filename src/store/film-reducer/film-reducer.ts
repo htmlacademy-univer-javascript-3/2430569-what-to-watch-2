@@ -30,6 +30,9 @@ export const filmReducer = createSlice({
         state.film = action.payload;
         state.isLoading = false;
       })
+      .addCase(fetchFilm.rejected, (state) => {
+        state.isLoading = false;
+      })
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })

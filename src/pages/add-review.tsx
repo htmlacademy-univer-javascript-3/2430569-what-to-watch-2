@@ -56,7 +56,7 @@ export const AddReview = () => {
       </div>
 
       <div className="add-review">
-        <AddReviewForm/>
+        <AddReviewForm filmId={stateFilm.id}/>
       </div>
 
     </section>
