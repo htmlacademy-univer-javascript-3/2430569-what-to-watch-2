@@ -1,20 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {ReducerName} from '../../types/reducer-name.ts';
 import {setError, setGenre} from '../actions.ts';
-import {Film} from '../../types/film.ts';
 import {Genre} from '../../types/genre.ts';
 import {fetchFavoriteFilms, fetchFilms, fetchPromo, logout, setFavorite} from '../api-actions.ts';
-
-interface MainState {
-  films: Film[];
-  genreFilms: Film[];
-  currentGenre: string;
-  isFilmsLoading: boolean;
-  error: null | string;
-  promo: null | Film;
-  favoriteFilms: Film[];
-  favoriteCount: number;
-}
+import {MainState} from '../../types/main-state.ts';
 
 const initialMainState: MainState = {
   films: [],

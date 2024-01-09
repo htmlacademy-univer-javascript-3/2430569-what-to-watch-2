@@ -1,16 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {ReducerName} from '../../types/reducer-name.ts';
-import {Film} from '../../types/film.ts';
-import {Review} from '../../types/review.ts';
 import {fetchFilm, fetchReviews, fetchSimilar, setFavorite} from '../api-actions.ts';
- interface FilmReducerState {
-  film: Film | null;
-  reviews: Review[];
-  similar: Film[];
-  isLoading: boolean;
-}
+import {FilmState} from '../../types/film-state.ts';
 
-const initialFilmState: FilmReducerState = {
+const initialFilmState: FilmState = {
   film: null,
   reviews: [],
   similar: [],
