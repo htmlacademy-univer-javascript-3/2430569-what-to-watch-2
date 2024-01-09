@@ -1,24 +1,24 @@
 import {Logo} from '../components/logo.tsx';
 import {Footer} from '../components/footer.tsx';
 import {Navigate} from 'react-router-dom';
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
 import {ReducerName} from '../types/reducer-name.ts';
 import {AuthStatus} from '../types/auth-status.ts';
-import {ROUTES} from '../routes/routes-data.ts';
+import {RoutesData} from '../routes/routes-data.ts';
 import {login} from '../store/api-actions.ts';
 
 const EMAIL_PATTERN = /^[\w\d._-]+@[\w\d.-]+\.[\w]{2,4}$/;
 
-export const SignIn = () => {
+const SignInComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const dispatch = useAppDispatch();
   const stateAuthStatus = useAppSelector((state) => state[ReducerName.Auth].authStatus);
 
-  if (stateAuthStatus === AuthStatus.AUTH) {
-    return <Navigate to={ROUTES.MAIN}/>;
+  if (stateAuthStatus === AuthStatus.Auth) {
+    return <Navigate to={RoutesData.Main}/>;
   }
 
   const SignInMessage = ({text}: {text: string}) => (
@@ -88,3 +88,5 @@ export const SignIn = () => {
     </div>
   );
 };
+
+export const SignIn = memo(SignInComponent);

@@ -3,9 +3,10 @@ import {ReducerName} from '../types/reducer-name.ts';
 import {logout} from '../store/api-actions.ts';
 import {AuthStatus} from '../types/auth-status.ts';
 import {Link} from 'react-router-dom';
-import {ROUTES} from '../routes/routes-data.ts';
+import {RoutesData} from '../routes/routes-data.ts';
+import {memo} from 'react';
 
-export const HeaderUserBlock = () => {
+const HeaderUserBlockComponent = () => {
   const stateAuthStatus = useAppSelector((state) => state[ReducerName.Auth].authStatus);
   const stateUser = useAppSelector((state) => state[ReducerName.Auth].user);
   const dispatch = useAppDispatch();
@@ -17,7 +18,7 @@ export const HeaderUserBlock = () => {
   return (
     <ul className="user-block">
       {
-        stateAuthStatus === AuthStatus.AUTH && (
+        stateAuthStatus === AuthStatus.Auth && (
           <li className="user-block__item">
             <div className="user-block__avatar">
               <img src={stateUser?.avatarUrl} alt="User avatar" width="63" height="63"/>
@@ -26,11 +27,12 @@ export const HeaderUserBlock = () => {
         )
       }
       <li className="user-block__item">
-        {stateAuthStatus === AuthStatus.AUTH ?
-          (<Link to={ROUTES.MAIN} onClick={handleLogoutClick} className="user-block__link">Sign out</Link>) :
-          (<Link to={ROUTES.SING_IN} className="user-block__link">Sign in</Link>)}
+        {stateAuthStatus === AuthStatus.Auth ?
+          (<Link to={RoutesData.Main} onClick={handleLogoutClick} className="user-block__link">Sign out</Link>) :
+          (<Link to={RoutesData.SignIn} className="user-block__link">Sign in</Link>)}
       </li>
     </ul>
   );
 };
 
+export const HeaderUserBlock = memo(HeaderUserBlockComponent);

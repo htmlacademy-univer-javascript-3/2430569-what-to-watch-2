@@ -1,6 +1,7 @@
 import {Logo} from './logo.tsx';
+import {memo} from 'react';
 
-export const Footer = () => (
+const FooterComponent = () => (
   <footer className="page-footer">
     <Logo light/>
     <div className="copyright">
@@ -8,3 +9,5 @@ export const Footer = () => (
     </div>
   </footer>
 );
+
+export const Footer = memo(FooterComponent);

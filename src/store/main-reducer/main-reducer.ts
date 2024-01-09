@@ -19,7 +19,7 @@ interface MainState {
 const initialMainState: MainState = {
   films: [],
   genreFilms: [],
-  currentGenre: Genre.DEFAULT_GENRE,
+  currentGenre: Genre.DefaultGenre,
   isFilmsLoading: false,
   error: null,
   promo: null,
@@ -37,7 +37,7 @@ export const mainReducer = createSlice({
       .addCase(setGenre, (state, action) => {
         state.currentGenre = action.payload;
         state.genreFilms =
-          action.payload === Genre.DEFAULT_GENRE
+          action.payload === Genre.DefaultGenre
             ? state.films
             : state.films.filter((film) => film.genre === action.payload);
       })

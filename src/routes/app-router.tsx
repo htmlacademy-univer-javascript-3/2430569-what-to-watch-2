@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {ROUTES} from './routes-data.ts';
+import {RoutesData} from './routes-data.ts';
 import {Main} from '../pages/main.tsx';
 import {SignIn} from '../pages/sign-in.tsx';
 import {MyList} from '../pages/my-list.tsx';
@@ -12,15 +12,15 @@ import {PrivateRoute} from './private-route.tsx';
 export const AppRouter = () => (
   <BrowserRouter>
     <Routes>
-      <Route path={ROUTES.MAIN} element={<Main/>}/>
-      <Route path={ROUTES.SING_IN} element={<SignIn/>}/>
-      <Route path={ROUTES.MY_LIST} element={<PrivateRoute><MyList/></PrivateRoute>}/>
-      <Route path={ROUTES.FILMS}>
-        <Route path={ROUTES.FILM} element={<MoviePage/>}/>
-        <Route path={ROUTES.REVIEW} element={<PrivateRoute><AddReview/></PrivateRoute>}/>
+      <Route path={RoutesData.Main} element={<Main/>}/>
+      <Route path={RoutesData.SignIn} element={<SignIn/>}/>
+      <Route path={RoutesData.MyList} element={<PrivateRoute><MyList/></PrivateRoute>}/>
+      <Route path={RoutesData.Films}>
+        <Route path={RoutesData.Film} element={<MoviePage/>}/>
+        <Route path={RoutesData.Review} element={<PrivateRoute><AddReview/></PrivateRoute>}/>
       </Route>
-      <Route path={ROUTES.PLAYER} element={<Player/>}/>
-      <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage/>}/>
+      <Route path={RoutesData.Player} element={<Player/>}/>
+      <Route path={RoutesData.NotFound} element={<NotFoundPage/>}/>
     </Routes>
   </BrowserRouter>
 );

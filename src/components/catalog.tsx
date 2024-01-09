@@ -1,7 +1,7 @@
 import {CatalogGenreList} from './catalog-genre-list.tsx';
 import {CatalogFilmList} from './catalog-film-list.tsx';
 import {useAppSelector} from '../store/hooks.ts';
-import {useCallback, useState} from 'react';
+import {memo, useCallback, useState} from 'react';
 import {ReducerName} from '../types/reducer-name.ts';
 
 interface Props {
@@ -9,13 +9,15 @@ interface Props {
   withoutShowMoreButton?: boolean;
 }
 
-const CatalogShowMoreButton = ({onClick} : {onClick: () => void}) => (
+const CatalogShowMoreButtonComponent = ({onClick} : {onClick: () => void}) => (
   <div className="catalog__more">
     <button className="catalog__button" type="button" onClick={onClick}>Show more</button>
   </div>
 );
 
-export const Catalog = ({withoutGenres = false, withoutShowMoreButton = false}: Props) => {
+const CatalogShowMoreButton = memo(CatalogShowMoreButtonComponent);
+
+const CatalogComponent = ({withoutGenres = false, withoutShowMoreButton = false}: Props) => {
   const LIST_LENGTH_STEP = 8;
   const stateFilms = useAppSelector((state) => state[ReducerName.Main].films);
   const [length, setLength] = useState(LIST_LENGTH_STEP);
@@ -32,3 +34,5 @@ export const Catalog = ({withoutGenres = false, withoutShowMoreButton = false}: 
     </section>
   );
 };
+
+export const Catalog = memo(CatalogComponent);

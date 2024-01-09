@@ -2,7 +2,7 @@ import {Logo} from '../components/logo.tsx';
 import {Footer} from '../components/footer.tsx';
 import {HeaderUserBlock} from '../components/header-user-block.tsx';
 import {Link, Navigate, useParams} from 'react-router-dom';
-import {ROUTES} from '../routes/routes-data.ts';
+import {RoutesData} from '../routes/routes-data.ts';
 import {MoviePageTabs} from '../components/movie-page-tabs.tsx';
 import {CatalogFilmList} from '../components/catalog-film-list.tsx';
 import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
@@ -10,9 +10,9 @@ import {Spinner} from '../components/spinner.tsx';
 import {fetchFilm, fetchReviews, fetchSimilar} from '../store/api-actions.ts';
 import {ReducerName} from '../types/reducer-name.ts';
 import {AuthStatus} from '../types/auth-status.ts';
-import {useLayoutEffect} from 'react';
+import {memo, useLayoutEffect} from 'react';
 
-export const MoviePage = ({inList = false}: {inList?: boolean}) => {
+const MoviePageComponent = ({inList = false}: {inList?: boolean}) => {
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const stateCurrentFilm = useAppSelector((state) => state[ReducerName.Film].film);
@@ -27,14 +27,14 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
       dispatch(fetchSimilar(id));
       dispatch(fetchReviews(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, stateCurrentFilm?.id]);
 
   if (stateIsCurrentFilmLoading) {
     return (<Spinner/>);
   }
 
   if (!stateCurrentFilm) {
-    return (<Navigate to={ROUTES.NOT_FOUND}/>);
+    return (<Navigate to={RoutesData.NotFound}/>);
   }
 
   return (
@@ -73,8 +73,8 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
                   <span className="film-card__count">9</span>
                 </button>
                 {
-                  stateAuthStatus === AuthStatus.AUTH &&
-                  <Link to={ROUTES.REVIEW.replace(':id', stateCurrentFilm.id)} className="btn film-card__button">Add review</Link>
+                  stateAuthStatus === AuthStatus.Auth &&
+                  <Link to={RoutesData.Review.replace(':id', stateCurrentFilm.id)} className="btn film-card__button">Add review</Link>
                 }
               </div>
             </div>
@@ -108,3 +108,5 @@ export const MoviePage = ({inList = false}: {inList?: boolean}) => {
     </>
   );
 };
+
+export const MoviePage = memo(MoviePageComponent);

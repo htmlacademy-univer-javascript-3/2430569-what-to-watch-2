@@ -1,7 +1,8 @@
 import {convertFilmRating} from '../utils/rating.ts';
 import {Film} from '../types/film.ts';
+import {memo} from 'react';
 
-export const MoviePageTabOverview = ({film}: {film: Film}) => (
+const MoviePageTabOverviewComponent = ({film}: {film: Film}) => (
   <>
     <div className="film-rating">
       <div className="film-rating__score">{film.rating}</div>
@@ -24,3 +25,5 @@ export const MoviePageTabOverview = ({film}: {film: Film}) => (
     </div>
   </>
 );
+
+export const MoviePageTabOverview = memo(MoviePageTabOverviewComponent);
