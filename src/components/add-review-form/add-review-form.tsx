@@ -2,6 +2,7 @@ import React, {ChangeEvent, Fragment, memo, useCallback, useState} from 'react';
 import {addReview, fetchReviews} from '../../store/api-actions.ts';
 import {useAppDispatch} from '../../store/hooks.ts';
 import {useNavigate} from 'react-router-dom';
+import {MAX_RATING} from '../const.ts';
 
 const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
   const [formData, setFormData] = useState({
@@ -36,7 +37,6 @@ const AddReviewFormComponent = ({filmId}: {filmId: string}) => {
     Min = 50,
     Max = 400,
   }
-  const MAX_RATING = 10;
 
   const isValidFormData =
     !isSending &&
